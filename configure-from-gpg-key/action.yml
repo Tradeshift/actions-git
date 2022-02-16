@@ -1,0 +1,47 @@
+name: "configure-from-gpg-key"
+description: "Helper action to configure git w/ commit signing based on a provided gpg key"
+
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#inputs
+inputs:
+  gpg-key:
+    description: 'GPG key to use for authoring and signing commits'
+    required: true
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputs
+outputs:
+  user:
+    description: 'Name <email@company.com> extracted from the supplied gpg key'
+    value: ${{ steps.gpg.outputs.user }}
+  name:
+    description: 'Name extracted from the supplied gpg key'
+    value: ${{ steps.gpg.outputs.name }}
+  email:
+    description: 'Email address extracted from the supplied gpg key'
+    value: ${{ steps.gpg.outputs.email }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up commit signing w/ GPG
+      shell: bash
+      id: gpg
+      run: |
+        KEYDIR=$(mktemp -d)
+        KEYFILE="${KEYDIR}/key.asc"
+        echo "${{ inputs.gpg-key }}" > "${KEYFILE}"
+        GPG_SHORTID=$(gpg --show-keys --keyid-format=long "${KEYFILE}" | grep sec | cut -d/ -f2 | cut -d' ' -f1)
+        gpg --import --batch --yes "${KEYFILE}"
+        git config --global commit.gpgsign true
+        git config --global user.signingkey "${GPG_SHORTID}"
+        # Get the "This User <this@email.com>" of the key:
+        GPG_USER=$(gpg --fingerprint "${GPG_SHORTID}" | sed -n '/^uid/s/.*\]\s//p')
+        # strip things outside <email>
+        _GPG_EMAIL=${GPG_USER#*\<}
+        GPG_EMAIL=${_GPG_EMAIL%>}
+        # strip up to start of <email>
+        GPG_NAME=${GPG_USER%<*}
+        git config --global user.email ${GPG_EMAIL}
+        git config --global user.name ${GPG_NAME}
+
+        echo "::set-output name=user::${GPG_USER}"
+        echo "::set-output name=name::${GPG_NAME}"
+        echo "::set-output name=email::${GPG_EMAIL}"

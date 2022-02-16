@@ -1,0 +1,13 @@
+{
+    "description": "Helper actions for working with git on github actions",
+    "maintainers": [
+        "developer-productivity"
+    ],
+    "checks": [
+        "build"
+    ],
+    "extraProtectedBranches": [],
+    "enableIssues": true,
+    "enableWiki": false,
+    "enableProjects": false
+}

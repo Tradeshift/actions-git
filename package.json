@@ -1,0 +1,24 @@
+{
+  "name": "@tradeshift/actions-rename-me",
+  "private": true,
+  "scripts": {
+    "lint": "tradeshift-scripts lint",
+    "format": "tradeshift-scripts format",
+    "test": "tradeshift-scripts test",
+    "validate": "tradeshift-scripts validate"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "tradeshift-scripts": "^4.0.1"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "lines": 50
+      }
+    }
+  }
+}

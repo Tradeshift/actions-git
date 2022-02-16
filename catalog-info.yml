@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: actions-git
+  description: "Helper actions for working with git on github actions"
+  annotations:
+    github.com/project-slug: Tradeshift/actions-git
+  tags:
+    - github-action
+spec:
+  type: other
+  lifecycle: experimental
+  owner: developer-productivity

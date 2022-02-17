@@ -5,28 +5,8 @@ on:
   pull_request:
 
 jobs:
-  build:
-    name: Build and test
-    runs-on: self-hosted
-    steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
-
-      - name: ⎔ Setup node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 12
-          cache: "npm"
-
-      - name: 📥 Download deps
-        run: npm install
-
-      - name: ▶️ Run validate script
-        run: npm run validate
-
   release:
     runs-on: self-hosted
-    needs: [build]
     # Run on non-fork branches only (master/main)
     if: ${{ !github.event.fork && !contains(github.ref, 'pull') }}
     steps:
@@ -34,10 +14,6 @@ jobs:
       - uses: tradeshift/actions-semantic-release@v1
         id: semantic-release
         with:
-          branches: |
-            [
-              'master'
-            ]
           check_name: Semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

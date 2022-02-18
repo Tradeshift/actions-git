@@ -9,7 +9,8 @@ Helper actions for working with git on github actions
 ### configure-from-gpg-key
 
 Configure the local `git` to use the name, email and signature specified in the
-supplied GPG key. Example below will commit as `tradeshiftcicomponents`.
+supplied GPG key. Example below will commit as the tradeshift CI user, by
+configuring `git` from the supplied GPG key. Any GPG key should work.
 
 ```yaml
 steps:
@@ -42,6 +43,14 @@ Usage with `git commit` / `git push`:
     git commit -am 'Awesome changes from CI'
     git push
 ```
+
+#### Outputs
+
+Action outputs available in workflows:
+
+- `user`: `Name <email@company.com>` extracted from the supplied gpg key
+- `email`: Email address extracted from the supplied gpg key
+- `name`: Name extracted from the supplied gpg key
 
 ## Contributing
 

@@ -6,7 +6,7 @@ on:
 
 jobs:
   release:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     # Run on non-fork branches only (master/main)
     if: ${{ !github.event.fork && !contains(github.ref, 'pull') }}
     steps:

@@ -42,6 +42,6 @@ runs:
         git config --global user.email ${GPG_EMAIL}
         git config --global user.name ${GPG_NAME}
 
-        echo "::set-output name=user::${GPG_USER}"
-        echo "::set-output name=name::${GPG_NAME}"
-        echo "::set-output name=email::${GPG_EMAIL}"
+        echo "user=${GPG_USER}" >> $GITHUB_OUTPUT
+        echo "name=${GPG_NAME}" >> $GITHUB_OUTPUT
+        echo "email=${GPG_EMAIL}" >> $GITHUB_OUTPUT

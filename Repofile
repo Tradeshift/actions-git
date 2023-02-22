@@ -1,7 +1,7 @@
 {
     "description": "Helper actions for working with git on github actions",
     "maintainers": [
-        "developer-productivity"
+        "sre"
     ],
     "checks": [
         "build"

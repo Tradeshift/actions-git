@@ -57,3 +57,4 @@ Action outputs available in workflows:
 Commits should follow the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) guidelines.
 In order to trigger releases, at least one commit must be either a `fix`, `feat` or `breaking change`.
 Refer to conventional commit guidelines and [semantic release](https://github.com/semantic-release/semantic-release) for more info.
+Test change (dont merge)

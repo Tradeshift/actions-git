@@ -11,7 +11,7 @@ jobs:
     if: ${{ !github.event.fork && !contains(github.ref, 'pull') }}
     steps:
       - uses: actions/checkout@v4
-      - uses: tradeshift/actions-semantic-release@v1
+      - uses: tradeshift/actions-semantic-release@v2
         id: semantic-release
         with:
           check_name: Semantic release

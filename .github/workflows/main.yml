@@ -10,7 +10,7 @@ jobs:
     # Run on non-fork branches only (master/main)
     if: ${{ !github.event.fork && !contains(github.ref, 'pull') }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: tradeshift/actions-semantic-release@v2
         id: semantic-release
         with:
